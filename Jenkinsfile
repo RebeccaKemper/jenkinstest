@@ -27,6 +27,13 @@ node() {
 
   def STEP_CONFIG_NEO_DEPLOY='neoDeploy'
   def STEP_CONFIG_MTA_BUILD='mtaBuild'
+  
+  stage("Install nodejs"){
+  echo "Install nodejs..."
+ 
+ def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        env.PATH = "${node}/bin:${env.PATH}"
+  }
 
   stage("Clone sources and setup environment"){
     deleteDir()
