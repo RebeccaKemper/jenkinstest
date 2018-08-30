@@ -36,9 +36,7 @@ node() {
   }
 	stage("Test Nodejs"){
 		echo "Test Nodejs..."
-		steps {
-        	sh 'npm config ls'
-    	}
+        sh 'npm config ls'
 	}
   stage("Clone sources and setup environment"){
     deleteDir()
