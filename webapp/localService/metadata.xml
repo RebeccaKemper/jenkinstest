@@ -1,0 +1,28 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+		<Schema xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
+			Namespace="dev.status">
+			<EntityType Name="StatusType">
+				<Key><PropertyRef Name="ST_ID"/></Key><Property Name="ST_ID" Type="Edm.Int32" Nullable="false"/><Property Name="ST_DATE" Type="Edm.DateTime"/><Property Name="U_ID" Type="Edm.Int32"/><Property Name="ST_ENDDATE" Type="Edm.DateTime"/><NavigationProperty Name="User" Relationship="dev.status.ToUserType" FromRole="StatusDependent" ToRole="UserPrincipal"/><NavigationProperty Name="Activity" Relationship="dev.status.ToActivityType" FromRole="StatusDependent" ToRole="ActivityPrincipal"/><NavigationProperty Name="Appointment" Relationship="dev.status.ToAppointmentsType" FromRole="StatusDependent" ToRole="AppointmentPrincipal"/></EntityType>
+			<EntityType Name="UserType">
+				<Key><PropertyRef Name="U_ID"/></Key><Property Name="U_ID" Type="Edm.Int32" Nullable="false"/><Property Name="U_NAME" Type="Edm.String" MaxLength="100"/><Property Name="U_PIC" Type="Edm.String" MaxLength="100"/></EntityType>
+			<EntityType Name="ActivityType">
+				<Key><PropertyRef Name="A_ID"/></Key><Property Name="A_ID" Type="Edm.Int32" Nullable="false"/><Property Name="A_STID" Type="Edm.Int32"/><Property Name="A_SID" Type="Edm.Int32"/><Property Name="A_DATE" Type="Edm.DateTime"/><Property Name="A_TEXT" Type="Edm.String" MaxLength="200"/><Property Name="A_Progress" Type="Edm.Int32"/><Property Name="A_NAME" Type="Edm.String" MaxLength="50"/><NavigationProperty Name="State" Relationship="dev.status.ToStateType" FromRole="ActivityDependent" ToRole="StatePrincipal"/></EntityType>
+			<EntityType Name="StateType">
+				<Key><PropertyRef Name="S_ID"/></Key><Property Name="S_ID" Type="Edm.Int32" Nullable="false"/><Property Name="S_NAME" Type="Edm.String" MaxLength="40"/><Property Name="S_ICON" Type="Edm.String" MaxLength="30"/></EntityType>
+			<EntityType Name="AppointmentType">
+				<Key><PropertyRef Name="AP_ID"/></Key><Property Name="AP_ID" Type="Edm.Int32" Nullable="false"/><Property Name="AP_STARTDATE" Type="Edm.DateTime"/><Property Name="AP_ENDDATE" Type="Edm.DateTime"/><Property Name="AP_TITLE" Type="Edm.String" MaxLength="30"/><Property Name="AP_STID" Type="Edm.Int32"/><NavigationProperty Name="Status" Relationship="dev.status.ToAppointmentsType" FromRole="AppointmentPrincipal" ToRole="StatusDependent"/></EntityType>
+			<Association Name="ToUserType"><End Type="dev.status.UserType" Role="UserPrincipal" Multiplicity="1"/><End Type="dev.status.StatusType" Role="StatusDependent" Multiplicity="*"/></Association>
+			<Association Name="ToActivityType"><End Type="dev.status.ActivityType" Role="ActivityPrincipal" Multiplicity="*"/><End Type="dev.status.StatusType" Role="StatusDependent" Multiplicity="1"/></Association>
+			<Association Name="ToStateType"><End Type="dev.status.StateType" Role="StatePrincipal" Multiplicity="1"/><End Type="dev.status.ActivityType" Role="ActivityDependent" Multiplicity="*"/></Association>
+			<Association Name="ToAppointmentsType"><End Type="dev.status.AppointmentType" Role="AppointmentPrincipal" Multiplicity="*"/><End Type="dev.status.StatusType" Role="StatusDependent" Multiplicity="1"/></Association>
+			<EntityContainer Name="status" m:IsDefaultEntityContainer="true"><EntitySet Name="Status" EntityType="dev.status.StatusType"/><EntitySet Name="User" EntityType="dev.status.UserType"/><EntitySet Name="Activity" EntityType="dev.status.ActivityType"/><EntitySet Name="State" EntityType="dev.status.StateType"/><EntitySet Name="Appointment" EntityType="dev.status.AppointmentType"/>
+				<AssociationSet Name="ToUser" Association="dev.status.ToUserType"><End Role="UserPrincipal" EntitySet="User"/><End Role="StatusDependent" EntitySet="Status"/></AssociationSet>
+				<AssociationSet Name="ToActivity" Association="dev.status.ToActivityType"><End Role="ActivityPrincipal" EntitySet="Activity"/><End Role="StatusDependent" EntitySet="Status"/></AssociationSet>
+				<AssociationSet Name="ToState" Association="dev.status.ToStateType"><End Role="StatePrincipal" EntitySet="State"/><End Role="ActivityDependent" EntitySet="Activity"/></AssociationSet>
+				<AssociationSet Name="ToAppointments" Association="dev.status.ToAppointmentsType"><End Role="AppointmentPrincipal" EntitySet="Appointment"/><End Role="StatusDependent" EntitySet="Status"/></AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
