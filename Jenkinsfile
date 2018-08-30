@@ -18,8 +18,6 @@ import com.sap.piper.ConfigurationMerger
 CONFIG_FILE_PROPERTIES = '.pipeline/config.properties'
 CONFIG_FILE_YML = '.pipeline/config.yml'
 
-  tools {nodejs "Nodejs"}
-  
 node() {
   //Global variables:
   APP_PATH = 'src'
