@@ -31,7 +31,7 @@ node() {
   stage("Install nodejs"){
   echo "Install nodejs..."
  
- def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+ def node = tool name: 'Nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
         env.PATH = "${node}/bin:${env.PATH}"
   }
 
