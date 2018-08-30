@@ -34,7 +34,12 @@ node() {
  def node = tool name: 'Nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
         env.PATH = "${node}/bin:${env.PATH}"
   }
-
+	stage("Test Nodejs"){
+		echo "Test Nodejs..."
+		steps {
+        	sh 'npm config ls'
+    	}
+	}
   stage("Clone sources and setup environment"){
     deleteDir()
     Map neoDeployConfiguration, mtaBuildConfiguration
