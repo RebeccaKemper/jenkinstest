@@ -29,6 +29,7 @@ node() {
   def STEP_CONFIG_MTA_BUILD='mtaBuild'
   
   stage("Install nodejs"){
+  deleteDir()
   echo "Install nodejs..."
  
  def node = tool name: 'Nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
