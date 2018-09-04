@@ -67,7 +67,8 @@ node() {
   }
 
   stage("Build Fiori App"){
-    dir(SRC){
+    dir(SRC){#
+       sh 'npm config ls'
       withEnv(["http_proxy=${proxy}", "https_proxy=${httpsProxy}"]) {
         MTAR_FILE_PATH = mtaBuild script: this, mtaJarLocation: MTA_JAR_LOCATION, buildTarget: 'NEO'
       }
