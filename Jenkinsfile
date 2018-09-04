@@ -29,6 +29,7 @@ node() {
   def STEP_CONFIG_MTA_BUILD='mtaBuild'
   
   stage("Install nodejs"){
+  deleteDir()
   echo "Install nodejs..."
  
  def node = tool name: 'Nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
@@ -39,7 +40,6 @@ node() {
         sh 'npm config ls'
 	}
   stage("Clone sources and setup environment"){
-    deleteDir()
     Map neoDeployConfiguration, mtaBuildConfiguration
     dir(APP_PATH) {
       checkout scm
