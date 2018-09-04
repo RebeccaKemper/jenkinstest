@@ -40,7 +40,6 @@ node() {
         sh 'npm config ls'
 	}
   stage("Clone sources and setup environment"){
-    deleteDir()
     Map neoDeployConfiguration, mtaBuildConfiguration
     dir(APP_PATH) {
       checkout scm
